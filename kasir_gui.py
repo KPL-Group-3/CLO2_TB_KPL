@@ -146,8 +146,6 @@ class KasirApp:
 
         self.uang_tunai_label = tk.Label(right_frame, text="Uang Tunai", font=("Segoe UI", 12), bg="#ffffff")
         self.uang_tunai_entry = tk.Entry(right_frame, font=("Segoe UI", 12))
-        self.uang_tunai_label.pack(padx=10, pady=(10,0), fill="x")
-        self.uang_tunai_entry.pack(padx=10, pady=(0,10), fill="x")
 
         tk.Button(right_frame, text="Bayar", command=self.bayar, font=("Segoe UI", 12), bg="#967bb6", fg="white").pack(pady=15, padx=10, fill="x")
         tk.Button(right_frame, text="Keluar", command=self.keluar_ke_dashboard, font=("Segoe UI", 12), bg="#967bb6", fg="white").pack(pady=5, padx=10, fill="x")
