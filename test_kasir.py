@@ -1,23 +1,33 @@
+# test_kasir.py
 import unittest
 from kasir import GenericList, ItemBelanja
 
 class TestKasir(unittest.TestCase):
-    def test_tambah_item(self):
-        kasir = GenericList[ItemBelanja]()
-        item = ItemBelanja("Indomie", 3000, 2)
-        kasir.add_item(item)
-        self.assertEqual(kasir.count(), 1)
+    def setUp(self):
+        self.kasir = GenericList[ItemBelanja]()
+        self.item1 = ItemBelanja("Teh Botol", 5000, 2)
+        self.item2 = ItemBelanja("Aqua", 3000, 1)
 
-    def test_subtotal(self):
-        item = ItemBelanja("Aqua", 5000, 3)
-        self.assertEqual(item.subtotal(), 15000)
+    def test_add_item(self):
+        self.kasir.add_item(self.item1)
+        self.assertEqual(self.kasir.count(), 1)
 
-    def test_total_harga_dan_diskon(self):
-        kasir = GenericList[ItemBelanja]()
-        kasir.add_item(ItemBelanja("Teh Botol", 7000, 2))  # 14.000
-        kasir.add_item(ItemBelanja("Roti Tawar", 12000, 1))  # 12.000
-        self.assertEqual(kasir.total_harga(), 26000)
-        self.assertAlmostEqual(kasir.total_setelah_diskon(0.1), 23400)  # diskon 10%
+    def test_total_harga(self):
+        self.kasir.add_item(self.item1)
+        self.kasir.add_item(self.item2)
+        total = self.kasir.total_harga()
+        self.assertEqual(total, 5000 * 2 + 3000)
 
-if __name__ == '__main__':
+    def test_total_diskon(self):
+        self.kasir.add_item(self.item1)
+        total_setelah_diskon = self.kasir.total_setelah_diskon(0.1)
+        self.assertEqual(total_setelah_diskon, 10000 * 0.9)
+
+    def test_get_items(self):
+        self.kasir.add_item(self.item2)
+        items = self.kasir.get_items()
+        self.assertEqual(len(items), 1)
+        self.assertEqual(items[0].nama, "Aqua")
+
+if __name__ == "__main__":
     unittest.main()

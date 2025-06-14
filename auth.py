@@ -1,7 +1,12 @@
+import hashlib
+
+# secure coding: Password disimpan sebagai hash
 users = {
-    "admin": "1234",
-    "kasir": "5678"
+    "admin": hashlib.sha256("1234".encode()).hexdigest(),
+    "kasir": hashlib.sha256("5678".encode()).hexdigest()
 }
 
 def login(username: str, password: str) -> bool:
-    return users.get(username) == password
+    # secure coding: autentikasi menggunakan hashing
+    hashed = hashlib.sha256(password.encode()).hexdigest()
+    return users.get(username) == hashed
