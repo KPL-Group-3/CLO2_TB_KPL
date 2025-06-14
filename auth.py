@@ -1,6 +1,5 @@
 import hashlib
 
-# secure coding: Password disimpan sebagai hash
 users = {
     "admin": hashlib.sha256("1234".encode()).hexdigest(),
     "kasir": hashlib.sha256("5678".encode()).hexdigest()

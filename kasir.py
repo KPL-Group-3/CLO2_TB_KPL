@@ -25,7 +25,7 @@ class GenericList(Generic[T]):
         return len(self.items)
 
     def total_harga(self) -> float:
-        return sum(item.subtotal() for item in self.items)
+        return sum(item.subtotal() for item in self.items) # type: ignore
 
     def total_setelah_diskon(self, diskon_rate: float) -> float:
         return self.total_harga() * (1 - diskon_rate)
